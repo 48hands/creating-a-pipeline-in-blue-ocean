@@ -8,8 +8,24 @@ pipeline {
   }
   stages {
     stage('Build') {
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'echo "Hello World"'
+            sh 'npm install'
+            timestamps()
+          }
+        }
+        stage('Build2') {
+          steps {
+            sh 'echo "Build2"'
+          }
+        }
+      }
+    }
+    stage('Cleanup') {
       steps {
-        sh 'echo "Hello World"'
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, cleanupMatrixParent: true, deleteDirs: true, disableDeferredWipeout: true)
       }
     }
   }
