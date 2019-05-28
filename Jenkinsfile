@@ -13,7 +13,6 @@ pipeline {
           steps {
             sh 'echo "Hello World"'
             sh 'npm --version'
-            timestamps()
           }
         }
         stage('Build2') {
