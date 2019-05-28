@@ -23,9 +23,10 @@ pipeline {
         }
       }
     }
-    stage('Cleanup') {
+    stage('Deliver') {
       steps {
-        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, cleanupMatrixParent: true, deleteDirs: true, disableDeferredWipeout: true)
+        input 'Continue?'
+        echo 'Deploy Deploy'
       }
     }
   }
